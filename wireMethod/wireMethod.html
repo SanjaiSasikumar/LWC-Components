@@ -1,0 +1,11 @@
+<template>
+    <lightning-card title="Wire Method" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <template for:each={accountList.data} for:item="acc">
+                <li key={acc.Id}>
+                    {acc.Name}
+                </li>
+            </template>
+        </div>
+    </lightning-card>
+</template>

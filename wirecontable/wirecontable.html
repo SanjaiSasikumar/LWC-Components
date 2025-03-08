@@ -1,0 +1,103 @@
+<template>
+    <table aria-multiselectable="true"
+        class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid"
+        aria-label="Example advanced table of Opportunities in actionable mode with ascending column sorting">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th aria-sort="none" class="slds-is-resizable slds-is-sortable slds-cell_action-mode" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Contact Name">Contact Name</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Account Name column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-121" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-sort="none" class="slds-is-resizable slds-is-sortable slds-cell_action-mode" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Email">Email</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Close Date column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-122" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+                <th aria-sort="none" class="slds-is-resizable slds-is-sortable slds-cell_action-mode" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="#" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Phone No.">Phone No.</span>
+                            <span class="slds-icon_container slds-icon-utility-arrowdown">
+                                <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
+                                </svg>
+                            </span>
+                        </div>
+                    </a>
+                    <div class="slds-resizable">
+                        <input type="range" aria-label="Stage column width"
+                            class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-123" max="1000"
+                            min="20" tabindex="0" />
+                        <span class="slds-resizable__handle">
+                            <span class="slds-resizable__divider"></span>
+                        </span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Check if data is available -->
+            <template if:true={conList.data}>
+                <!-- Loop through contacts -->
+                <template for:each={conList.data} for:item="con">
+                    <tr key={con.Id} aria-selected="false" class="slds-hint-parent">
+                        <!-- Last Name Column -->
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title={con.LastName}>{con.LastName}</div>
+                        </td>
+                        <!-- Phone Column -->
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title={con.Email}>{con.Email}</div>
+                            
+                        </td>
+                        <!-- Email Column -->
+                        <td class="slds-cell_action-mode" role="gridcell">
+                            <div class="slds-truncate" title={con.Phone}>{con.Phone}</div>
+                        </td>
+                    </tr>
+                </template>
+            </template>
+            <!-- Error handling if there is an error fetching the data -->
+            <template if:true={conList.error}>
+                <tr>
+                    <td colspan="3">Error loading contacts</td>
+                </tr>
+            </template>
+                     
+        </tbody>
+    </table>
+</template>

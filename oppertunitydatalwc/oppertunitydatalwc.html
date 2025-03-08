@@ -1,0 +1,159 @@
+<template>
+    <lightning-card title="Insert Opportunity Record Details" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <button class="slds-button slds-button_brand" onclick={handleshowPopup}>Create Opportunity</button>
+        </div>
+    </lightning-card>
+
+    <template lwc:if={showpopup}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+            class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <button class="slds-button slds-button_icon slds-modal__close">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                    </svg>
+                    <span class="slds-assistive-text">Cancel and close</span>
+                </button>
+                <div class="slds-modal__header">
+                    <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">New Opportunity</h1>
+                    <p align="Right">* = Required Information</p>
+                    <div class="demo-only" style="padding:0.3rem;background:#f2f2f2;border-radius:5px">
+                        <div class="slds-text-color_inverse" align="Left" style="color: black">Opportunity Information</div>
+                    </div>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span>
+                                <div class="slds-text-title slds-truncate" title="Opportunity Owner">Opportunity Owner</div>
+                                    <div title="Hyperlink">
+                                        <div class="slds-media slds-media_small">
+                                            <div class="slds-media__figure">
+                                                <span class="slds-avatar slds-avatar_circle slds-avatar_x-small">
+                                                    <img alt="Person name" src="/assets/images/avatar2.jpg" title="User avatar" />
+                                                </span>
+                                            </div>
+                                            <div class="slds-media__body">
+                                                <a href="#">Sanjai Sasikumar</a>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="slds-form-element">
+                                        <label class="slds-form-element__label" for="checkbox-unique-id-48">Private</label>
+                                        <div class="slds-form-element__control">
+                                        <span class="slds-checkbox slds-checkbox_standalone">
+                                        <input type="checkbox" id="checkbox-unique-id-48" name="Private" value="option" onchange={handleChange} />
+                                        <span class="slds-checkbox_faux"></span>
+                                        </span>
+                                        </div>
+                                        </div>
+
+                                        <div class="slds-form-element">
+                                            <label class="slds-form-element__label" for="text-input-id-46">
+                                            <abbr class="slds-required" title="required">* </abbr>Opportunity Name</label>
+                                            <div class="slds-form-element__control">
+                                            <input type="text" id="text-input-id-46" required="" class="slds-input" name="OpportunityName" onchange={handleChange} />
+                                            </div>
+                                            </div>
+
+                                            <lightning-record-picker onchange={handleChange} name="parentId"
+                                            label="Account Name"
+                                            placeholder="Search Accounts..."
+                                            object-api-name="Account">
+                                        </lightning-record-picker>
+
+                                        <lightning-combobox
+                                        name="Type" 
+                                        label="Type"
+                                        value={Type}
+                                        options={options}
+                                        onchange={handleChange} ></lightning-combobox>
+
+                                        <lightning-combobox
+                                        name="LeadSource"
+                                        label="Lead Source"
+                                        value={LeadSource}
+                                        options={options1}
+                                        onchange={handleChange} ></lightning-combobox>
+                                </span>
+                        </div>
+                        <div class="slds-col slds-p-horizontal_medium">
+                            <span>
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="text-input-id-26">Amount</label>
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right">
+                                    <svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#search"></use>
+                                    </svg>
+                                    <input type="text" id="text-input-id-26" class="slds-input" onchange={handleChange} name="Amount" />
+                                    </div>
+                                    </div>
+
+                                    <lightning-input type="date" label="Close Date" required name="CloseDate" onchange={handleChange}></lightning-input>
+                                    <lightning-input type="text" label="Next Step" name="NextStep" onchange={handleChange}></lightning-input>
+
+                                    <lightning-combobox
+                                    name="Stage" 
+                                    label="Stage" required=""
+                                    value={Stage}
+                                    options={options2}
+                                    onchange={handleChange} ></lightning-combobox>
+
+                                    <lightning-input type="text" label="Probability (%)" name="Probability" onchange={handleChange}></lightning-input>
+
+                                    <lightning-record-picker onchange={handleChange}
+                                    label="Primary Campaign Source" name="Campagin"
+                                    placeholder="Search Campaigns..."
+                                    object-api-name="Campaign">
+                                </lightning-record-picker>
+
+                            </span>
+
+                                 </div>
+                        </div>
+                        <div class="demo-only" style="padding:0.3rem;background:#f2f2f2;border-radius:5px">
+                            <div class="slds-text-color_inverse" align="Left" style="color: black">Additional Information</div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                            <span>
+                                <lightning-input type="text" label="Order Number" name="OrderNumber" onchange={handleChange}></lightning-input>
+                                <lightning-input type="text" label="Current Generator(s)" name="CurrentGenerator" onchange={handleChange}></lightning-input>
+                                <lightning-input type="text" label="Tracking Number" name="TrackingNumber" onchange={handleChange}></lightning-input>
+                            </span>
+                            </div>
+                            <div class="slds-col">
+                            <span>
+
+                            <lightning-input type="text" label="Main Competitor(s)" name="MainCompetitor"></lightning-input>
+                            <lightning-combobox
+                            name="Delivery"
+                            label="Delivery/Installation Status"
+                            value={Delivery}
+                            options={options3}
+                            onchange={handleChange} ></lightning-combobox>
+                            </span>
+                            </div>
+                    </div>
+                    <div class="demo-only" style="padding:0.3rem;background:#f2f2f2;border-radius:5px">
+                        <div class="slds-text-color_inverse" align="Left" style="color: black">Description Information</div>
+                    </div>
+    
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="textarea-id-01">Description</label>
+                        <div class="slds-form-element__control">
+                        <textarea id="textarea-id-01" class="slds-textarea" name="Description" onchange={handleChange}></textarea>
+                        </div>
+                        </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleshowPopup}
+                        aria-label="Cancel and close">Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+                </div>               
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+    </template>
+</template>
